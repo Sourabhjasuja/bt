@@ -1,0 +1,19 @@
+/* Write your custom CSS here */
+
+td.input-width-area input {
+    width: 74%;
+    float: left;
+    margin-right: 3px !important;
+}
+td.input-width-area .col-sm-4:first-child {
+    padding: 0 0px 0 14px !important;
+}
+td.input-width-area .col-sm-4{ padding: 0 0px 0 0 !important; }
+td.input-width-area {
+    width: 250px;
+    line-height: 30px !important;
+}
+.form-control.col-sm-10 {
+    width: 90%;
+    margin-right: 5px;
+}
