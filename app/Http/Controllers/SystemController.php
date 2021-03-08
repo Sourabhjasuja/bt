@@ -52,4 +52,10 @@ class SystemController extends Controller
     public function usersActivity() {
         return view('frontend.system.usersActivity');
     }
+
+    public function branches(){
+    	$userData = Auth::user();
+    	$data['branches'] = $userData->branches;
+        return view('frontend.system.branches')->with($data);
+    }
 }

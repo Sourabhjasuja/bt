@@ -23,6 +23,7 @@
 	  				</ul>
 	  				<h6>System</h6>
 	  				<ul>
+	  					<li><a href="{{ url('system/branches') }}">Branch Offices</a></li>
 	  					<li><a href="{{ url('system/users/activity') }}">User Activity</a></li>
 	  					<li><a href="{{ url('system/users/group') }}">User Groups</a></li>
 	  					<li><a href="{{ url('system/users') }}">Users</a></li>
