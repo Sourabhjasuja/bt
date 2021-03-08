@@ -58,4 +58,9 @@ class SystemController extends Controller
     	$data['branches'] = $userData->branches;
         return view('frontend.system.branches')->with($data);
     }
+    public function branchAdd(){
+        $userData = Auth::user();
+        $data = [];
+        return view('frontend.system.branchAdd')->with($data);
+    }
 }
