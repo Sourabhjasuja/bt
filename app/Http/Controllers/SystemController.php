@@ -7,6 +7,9 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash; use Auth;
+use App\Models\UserGroup;
+use App\Models\Permission;
+
 
 class SystemController extends Controller
 {
@@ -63,4 +66,22 @@ class SystemController extends Controller
         $data = [];
         return view('frontend.system.branchAdd')->with($data);
     }
+    
+    
+        
+       public function showUserGroup($groupId)
+    {
+        $userData = Auth::user();
+     
+        $userGroupById= UserGroup::select("*")
+                        ->where("id", "=", $groupId)
+                        ->get();
+        
+        $permissions= Permission::all();
+        return view('frontend.system.showUsersGroupById',compact(['userGroupById','permissions']));
+        
+       
+        echo $userGroupById;
+    }
+    
 }

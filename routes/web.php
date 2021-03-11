@@ -34,5 +34,8 @@ Route::group(['prefix' => '','middleware' => 'auth'], function () {
 	Route::get('/system/users/activity','App\Http\Controllers\SystemController@usersActivity');
 	Route::get('/system/branches','App\Http\Controllers\SystemController@branches');
 	Route::get('/system/branch/add','App\Http\Controllers\SystemController@branchAdd');
+        
+        Route::get('/users/group/{groupId}','App\Http\Controllers\SystemController@showUserGroup');
+
 
 });
