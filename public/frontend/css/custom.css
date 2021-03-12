@@ -27,3 +27,7 @@ nav.navbar ul li.nav-item.active a.nav-link { background: #fff; color: #2D3E83 !
 .tab { border-radius: 0px; }
 .tab .col-sm-11 { border-top: solid 1px #f1f1f1; border-left: none; padding-top: 20px; text-align: center; }
 }
+.form-group .required:after {
+  content:"*";
+  color:red;
+}

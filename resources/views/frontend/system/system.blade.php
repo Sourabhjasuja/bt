@@ -1,5 +1,5 @@
 @extends('frontend.layout')
-@section('title', 'Sytem Setup')
+@section('title', 'System Setup')
 @section('content')
 
 <main class="content">
