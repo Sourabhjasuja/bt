@@ -156,6 +156,10 @@
 					        			<label class="col-sm-4 text-right">Prior System Key</label>
 					        			<div class="col-sm-8">
 					        				<div class="form-check">
+					        					<input type="checkbox" name="prior_system[]" value="5" class="form-check-input" id="exampleCheck5">
+    											<label class="form-check-label" for="exampleCheck5">Lotted</label>
+					        				</div>
+					        				<div class="form-check">
 					        					<input type="checkbox" name="prior_system[]" value="1" class="form-check-input" id="exampleCheck1">
     											<label class="form-check-label" for="exampleCheck1">Kit Item</label>
 					        				</div>
@@ -175,7 +179,91 @@
 					        		</div>
 			        			</div>
 			        			
-			        			<div class="col-sm-4"></div>
+			        			<div class="col-sm-4">
+			        				<div class="form-group row">
+					        			<label class="col-sm-4 text-center">Manufacturer</label>
+					        		</div>
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">Name</label>
+					        			<div class="col-sm-8">
+						        			<select name="manufacturer_name" class="form-control">
+												<option selected="selected" value="0">[None]</option>
+												<option value="114">AirSep</option>
+												<option value="118">DRIVE</option>
+												<option value="116">Guardian</option>
+												<option value="105">Invacare</option>
+												<option value="292">LOT#______________________________________________</option>
+												<option value="120">MABIS DMI</option>
+												<option value="336">MAKE:____________________MODEL:_______________</option>
+												<option value="337">MAKE:____________________MODEL:_______________SIZE</option>
+												<option value="132">MAKE:__________________MODEL:__________________HRS</option>
+												<option value="119">MEDLINE</option>
+												<option value="129">PRIDE</option>
+												<option value="121">PROBASICS</option>
+												<option value="111">ResMed</option>
+												<option value="108">Respironics</option>
+												<option value="112">Ross Labs</option>
+												<option value="109">Salter Labs</option>
+												<option value="307">SN#_______________________________________________</option>
+											</select>
+						        		</div>
+					        		</div>
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">ID</label>
+					        			<div class="col-sm-8">
+					        				<input type="text" name="manufacturer_id" class="form-control">
+					        			</div>
+					        		</div>
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">Bar Code</label>
+					        			<div class="col-sm-8">
+					        				<input type="text" name="manufacturer_bar_code" class="form-control">
+					        			</div>
+					        		</div>
+			        			</div>
+			        			<div class="col-sm-4">
+			        				<div class="form-group row">
+					        			<label class="col-sm-4 text-center">User Data</label>
+					        		</div>
+					        		@for($i=1;$i<=4;$i++)
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">User {{$i}}</label>
+					        			<div class="col-sm-8">
+					        				<input type="text" name="user_data_{{$i}}" class="form-control">
+					        			</div>
+					        		</div>
+					        		@endfor
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-center">Item Pricing</label>
+					        		</div>
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">Proc Code</label>
+					        			<div class="col-sm-6">
+					        				<input type="text" name="proc_code" class="form-control">
+					        			</div>
+					        			<div class="col-sm-2">
+					        				<a href="javascript:void(0)" class="btn btn-sm"><i class="fa fa-search"></i></a><a href="javascript:void(0)" class="btn btn-sm"><i class="fa fa-trash"></i></a>
+					        			</div>
+					        		</div>
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">Rental Amount</label>
+					        			<div class="col-sm-8">
+					        				<input type="text" name="rental_amount" class="form-control">
+					        			</div>
+					        		</div>
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">Purchase Amount</label>
+					        			<div class="col-sm-8">
+					        				<input type="text" name="purchase_amount" class="form-control">
+					        			</div>
+					        		</div>
+					        		<div class="form-group row">
+					        			<label class="col-sm-4 text-right">Default Billing Multiplier</label>
+					        			<div class="col-sm-8">
+					        				<input type="text" name="default_billing_multiplier" class="form-control">
+					        			</div>
+					        		</div>
+			        			</div>
 			        		</div>
 			        	</div>
 			        	<div class="tab-pane" id="tab-2" role="tabpanel">
