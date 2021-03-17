@@ -35,8 +35,10 @@ Route::group(['prefix' => '','middleware' => 'auth'], function () {
 	Route::get('/system/branches','App\Http\Controllers\SystemController@branches');
 	Route::get('/system/branch/add','App\Http\Controllers\SystemController@branchAdd');
         
-    Route::get('/users/group/{groupId}','App\Http\Controllers\SystemController@showUserGroup');
-
+    Route::get('/users/group/{groupId}','App\Http\Controllers\UserGroupController@showUserGroup');
+    Route::post('/users/group/{groupId}/{permission_id}','App\Http\Controllers\UserGroupController@updateGeneralPermission'); 
+    Route::post('/users/group/{groupId}/{doc_permission_id}','App\Http\Controllers\UserGroupController@updateDocPermission'); 
+    
     /*===============Inventory=====================*/
     Route::get('/inventory', 'App\Http\Controllers\InventoryController@list');
     Route::get('/inventory/add', 'App\Http\Controllers\InventoryController@add');

@@ -55,20 +55,27 @@
 								
 							</thead>
 							<tbody>
-								@foreach($permissions as $key=>$group)
+								@foreach($combined_info_general as $key=>$group)
 								<tr>
-									<td>{{$group->name}}</td>
-									<td> <div class="dropdown">
+									<td>{{$group->permission_name}}</td>
+									
+									<td> 
+									 <form action= "{{url('/users/group/'.$group->group_id.'/'.$group->permission_id)}}" method = "post">
+ 										 @csrf
+ 									<div class="dropdown">
                                                                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										    Full Access
+										    {{$group->access}}
  										 </button>
+ 										 
 										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
- 										   <a class="dropdown-item" href="#">Full Access</a>
-										    <a class="dropdown-item" href="#">Read Only</a>
-										    <a class="dropdown-item" href="#">Denied</a>
+ 										   <button type="submit" class="dropdown-item" name="access" value="Full Access">Full Access</a>
+										    <button type="submit" class="dropdown-item" name="access" value="Read Only" >Read Only</a>
+										    <button type="submit" class="dropdown-item" name="access" value="Denied" >Denied</a>
 										  </div>
 										</div>
+									</form>
 									</td>
+									
 								</tr>
 								@endforeach
 							</tbody>
@@ -78,18 +85,51 @@
 			        	
 			        	<div class="tab-pane" id="tab-3" role="tabpanel">
 			          		<table class="table">
-			          			<thead>
-			          				<tr>
-			          				</tr>
-			          			</thead>
-			          			<tbody>
-			          				<tr>
-			          					<td></td>
-			          					<td></td>
-			          					<td></td>
-			          				</tr>
-			          			</tbody>
-			          		</table>
+			          			
+			          			<ul class="nav nav-tabs" role="tablist">
+		     		   				<li class="nav-item"><a class="nav-link active" href="#tab-3-1" data-toggle="tab" role="tab">Permission</a></li>
+		     	 				  	<li class="nav-item"><a class="nav-link" href="#tab-3-2" data-toggle="tab" role="tab">History</a></li>
+		        	
+		     				 	</ul>
+			  
+			                        <div class="tab-pane" id="tab-3-1" role="tabpanel">
+			        	        <table class="table simpleDataTable">
+							<thead>
+								<th>Permission</th>
+								<th>Access</th>
+								
+							</thead>
+							<tbody>
+								@foreach($combined_info_doc as $key=>$group)
+								<tr>
+									<td>{{$group->doc_permission_name}}</td>
+										
+									<td> 
+									 <form action= "{{url('/users/group/'.$group->group_id.'/'.$group->doc_permission_id)}}" method = "post">
+ 										 @csrf
+ 									
+									<div class="dropdown">
+                                                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    {{$group->access}}
+ 										 </button>
+ 										 
+										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+ 										   <button type="submit" class="dropdown-item" name="access" value="Full Access">Full Access</a>
+										    <button type="submit" class="dropdown-item" name="access" value="Read Only" >Read Only</a>
+										    <button type="submit" class="dropdown-item" name="access" value="Denied" >Denied</a>
+									          </div>
+									</div>
+									
+									</form>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						 </table>
+			          
+			                	</div>
+			        	             
+			          		
 			        	</div>
 			        	
 			        	<div class="tab-pane" id="tab-4" role="tabpanel">
