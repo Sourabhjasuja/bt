@@ -1,9 +1,9 @@
-@extends('frontend.layout')
+  @extends('frontend.layout')
 @section('title', 'Add User Group')
 @section('content')
 
 <main class="content">
-  <div class="col-lg-6">
+  <div class="col-lg-12">
   	<div class="card">
   		<div class="card-header">
   			<h6>Add User Group</h6>
@@ -28,8 +28,47 @@
 			        		</div>
 			        	</div>
 			        	<div class="tab-pane" id="tab-2" role="tabpanel">
-			          
-			        	</div>
+			                   <table class="table simpleDataTable">
+							<thead>
+								<th>Permission</th>
+								<th>Access</th>
+								
+							</thead>
+							<tbody>
+							<div class="form-group">
+					                      @foreach($permissions as $key=>$group)
+					                       <tr>  
+								    
+								    	
+								    	<td>{{$group->permission_name}}</td>
+								    	<td>
+								    	
+								    	
+								    	
+								    	        <div class="input-group mb-3">
+											  <div class="input-group-prepend">
+											    <label class="input-group-text" for="{{$group->id}}"></label>
+											  </div>
+											  <select class="custom-select" id="{{$group->id}}" name="{{'permission'.$group->id}}"  onsubmit="permissionSelectOnChange(this)">
+											    <option  value="FullAccess" >FullAccess</option>
+											    <option value="ReadOnly">ReadOnly</option>
+											    <option selected value="Denied">Denied</option>
+											  </select>
+										
+											
+								    	</td>
+	     				                                  
+	     				                                    
+								    	
+								    </div>
+								</tr>
+								@endforeach
+							</div>	
+							</tbody>
+						</table>
+					</div>		
+				 
+			        
 			        	<div class="tab-pane" id="tab-3" role="tabpanel">
 			          		<table class="table">
 			          			<thead>
@@ -58,5 +97,12 @@
   	</div>
   </div>
 </main>
+<script>
+function permissionSelectOnChange(elem) {
+    d = document.getElementsByTagName("select").value;
+    alert(elem.name);
+}
+</script>
 
+ 
 @endsection

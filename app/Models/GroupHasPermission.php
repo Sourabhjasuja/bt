@@ -10,4 +10,5 @@ class GroupHasPermission extends Model
     use HasFactory;
      public $timestamps = false;
      protected $table = 'GroupHasPermissions';
+     protected $fillable = ['group_id','permission_id','access'];
 }

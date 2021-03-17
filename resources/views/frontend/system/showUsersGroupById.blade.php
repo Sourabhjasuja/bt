@@ -33,7 +33,7 @@
 								<tr>
 								<td>
 								@foreach($userGroupById as $key=>$group)
-									<input readonly value="{{ $group->name }}">
+									<input type="text" disabled="disabled" value="{{ $group->name }}">
 								@endforeach
 									
 								</td>
@@ -130,7 +130,7 @@
 			                	</div>
 			        	             
 			          		
-			        	</div>
+			        	
 			        	
 			        	<div class="tab-pane" id="tab-4" role="tabpanel">
 			          		<table class="table">
