@@ -12,8 +12,8 @@
   			<form>
 	  			<div class="tab">
 			      	<ul class="nav nav-tabs" role="tablist">
-			        	<li class="nav-item"><a class="nav-link active" href="#tab-1" data-toggle="tab" role="tab">Item</a></li>
-			        	<li class="nav-item"><a class="nav-link" href="#tab-2" data-toggle="tab" role="tab">Serial Nos.</a></li>
+			        	<li class="nav-item"><a class="nav-link active" href="#tab-1" onclick="$('form').submit();">Item</a></li>
+			        	<li class="nav-item"><a class="nav-link" href="#tab-2" onclick="$('form').submit();">Serial Nos.</a></li>
 			        	<li class="nav-item"><a class="nav-link" href="#tab-3" data-toggle="tab" role="tab">Pricing</a></li>
 			        	<li class="nav-item"><a class="nav-link" href="#tab-4" data-toggle="tab" role="tab">Package</a></li>
 			        	<li class="nav-item"><a class="nav-link" href="#tab-5" data-toggle="tab" role="tab">Documents</a></li>
