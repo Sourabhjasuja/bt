@@ -4,7 +4,7 @@
 
 <main class="content">
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">
 					<h6>User Group <a href="{{url('system/users/add')}}" class="float-right btn btn-sm btn-primary"><i class="fas fa-plus"></i> Add New User</a></h6>
@@ -25,7 +25,7 @@
 									<td>{{$key+1}}</td>
 									<td><a href="{{ url('/users/edit/'.$user->id) }}">{{ $user->first_name }}</a></td>
 									<td>{{ $user->email }}</td>
-									<td>{{ $user->user_group->name }}</td>
+									<td> {{$user->name }}</td>
 								</tr>
 								@endforeach
 							</tbody>

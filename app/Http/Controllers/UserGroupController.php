@@ -33,12 +33,12 @@ class UserGroupController extends Controller
         //$permissions= Permission::all();
         
         $combined_info_general = GroupHasPermission::join('user_groups', 'user_groups.id', '=', 'GroupHasPermissions.group_id')
-    		->join('permissions', 'permissions.id', '=', 'GroupHasPermissions.permission_id')
+    		->join('permissions', 'permissions.permission_id', '=', 'GroupHasPermissions.permission_id')
     		->where('user_groups.id', '=', $groupId)
     		->get();
         
         $combined_info_doc = GroupHasDocPermission::join('user_groups', 'user_groups.id', '=', 'GroupHasDocPermissions.group_id')
-    		->join('document_permissions', 'document_permissions.id', '=', 'GroupHasDocPermissions.doc_permission_id')
+    		->join('document_permissions', 'document_permissions.doc_permission_id', '=', 'GroupHasDocPermissions.doc_permission_id')
     		->where('user_groups.id', '=', $groupId)
     		->get();
         
@@ -78,4 +78,59 @@ class UserGroupController extends Controller
        
         return redirect()->back()->with("success");
      }
-}
+    
+    public function editUserGroup(Request $request,$groupId)
+    {
+        # code...
+        
+       
+        
+	       
+	        $count=Permission::count();
+	        for($i=1;$i<=$count;$i++){
+			$string1=(string)$i;
+			$string='permission'.$string1;
+			$access=$request->input($string);
+			if($access== null){
+			    $access='Denied';
+			}
+		       $update = GroupHasPermission::where("group_id","=", $groupId)
+				                    ->where("permission_id","=", $i)
+				                    -> update([
+				                    'access'=> $request->access
+				                    ]);
+
+		}
+			
+			
+	        $count2=DocPermission::count();
+	        for($j=1;$j<=$count2;$j++){
+			$string1=(string)$j;
+			$string='doc_permission'.$string1;
+			$access=$request->input($string);
+			if($access== null){
+			    $access='Denied';
+			}
+			
+	        }
+	        
+	         $update = GroupHasDocPermission::where("group_id","=", $groupId)
+                                    ->where("doc_permission_id","=", $doc_permission_id)
+                                    -> update([
+                                    'access'=> $request->access
+                                    ]);
+      
+	        
+	        $request->session()->flash('message.level', 'success');
+	        $request->session()->flash('message.content', 'User Group successfully Added!');
+	        
+	        
+    	
+    	return redirect()->back();
+   
+        
+    }
+    
+}  
+
+

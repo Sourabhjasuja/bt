@@ -15,6 +15,7 @@
 			</h6>
   		</div>
   		<div class="card-body">
+  		<form>
   			<div class="tab">
 		      	<ul class="nav nav-tabs" role="tablist">
 		        	<li class="nav-item"><a class="nav-link active" href="#tab-1" data-toggle="tab" role="tab">Main</a></li>
@@ -33,7 +34,7 @@
 								<tr>
 								<td>
 								@foreach($userGroupById as $key=>$group)
-									<input type="text" disabled="disabled" value="{{ $group->name }}">
+									<input type="text" readonly value="{{ $group->name }}">
 								@endforeach
 									
 								</td>
@@ -55,29 +56,45 @@
 								
 							</thead>
 							<tbody>
-								@foreach($combined_info_general as $key=>$group)
-								<tr>
-									<td>{{$group->permission_name}}</td>
-									
-									<td> 
-									 <form action= "{{url('/users/group/'.$group->group_id.'/'.$group->permission_id)}}" method = "post">
- 										 @csrf
- 									<div class="dropdown">
-                                                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										    {{$group->access}}
- 										 </button>
- 										 
-										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
- 										   <button type="submit" class="dropdown-item" name="access" value="Full Access">Full Access</a>
-										    <button type="submit" class="dropdown-item" name="access" value="Read Only" >Read Only</a>
-										    <button type="submit" class="dropdown-item" name="access" value="Denied" >Denied</a>
-										  </div>
+								<div class="form-group">
+					                      @foreach($combined_info_general as $key=>$group)
+					                       <tr>  
+								    
+								    	
+								    	<td>{{$group->permission_name}}</td>
+								    	<td>
+								    	
+								    	
+								    	
+								    	        <div class="input-group mb-3">
+											  <div class="input-group-prepend">
+											    <label class="input-group-text" for="{{$group->permission_id}}"></label>
+											  </div>
+											  <select class="custom-select" id="{{$group->permission_id}}" name="{{'permission'.$group->permission_id}}"  onsubmit="permissionSelectOnChange(this)">
+											    @if($group->access == 'FullAccess' || $group->access == 'Full Access')
+											    <option  selected  value="FullAccess" >FullAccess</option>
+											    <option value="ReadOnly">ReadOnly</option>
+											    <option  value="Denied">Denied</option>
+											    @elseif($group->access == 'ReadOnly'||$group->access == 'Read Only')
+											    <option    value="FullAccess" >FullAccess</option>
+											    <option selected value="ReadOnly">ReadOnly</option>
+											    <option  value="Denied">Denied</option>
+											    @else
+											    <option    value="FullAccess" >FullAccess</option>
+											    <option value="ReadOnly">ReadOnly</option>
+											    <option selected value="Denied">Denied</option>
+											     @endif
+											  </select>
 										</div>
-									</form>
-									</td>
-									
+											
+								    	</td>
+	     				                                  
+	     				                                    
+								    	
+								    </div>
 								</tr>
 								@endforeach
+							</div>
 							</tbody>
 						</table>
 			          
@@ -100,30 +117,45 @@
 								
 							</thead>
 							<tbody>
-								@foreach($combined_info_doc as $key=>$group)
-								<tr>
-									<td>{{$group->doc_permission_name}}</td>
+								<div class="form-group">
+					                      @foreach($combined_info_doc as $key=>$group)
+					                       <tr>  
+								    
+								    	
+								    	<td>{{$group->doc_permission_name}}</td>
+								    	<td>
+								    	
+								    	
+								    	
+								    	        <div class="input-group mb-3">
+											  <div class="input-group-prepend">
+											    <label class="input-group-text" for="{{$group->doc_permission_id}}"></label>
+											  </div>
+											  <select class="custom-select" id="{{$group->doc_permission_id}}" name="{{'doc_permission'.$group->id}}"  onsubmit="permissionSelectOnChange(this)">
+											    @if($group->access == 'FullAccess' || $group->access == 'Full Access')
+											    <option  selected  value="FullAccess" >FullAccess</option>
+											    <option value="ReadOnly">ReadOnly</option>
+											    <option  value="Denied">Denied</option>
+											    @elseif($group->access == 'ReadOnly'||$group->access == 'Read Only')
+											    <option    value="FullAccess" >FullAccess</option>
+											    <option selected value="ReadOnly">ReadOnly</option>
+											    <option  value="Denied">Denied</option>
+											    @else
+											    <option    value="FullAccess" >FullAccess</option>
+											    <option value="ReadOnly">ReadOnly</option>
+											    <option selected value="Denied">Denied</option>
+											     @endif
+											  </select>
 										
-									<td> 
-									 <form action= "{{url('/users/group/'.$group->group_id.'/'.$group->doc_permission_id)}}" method = "post">
- 										 @csrf
- 									
-									<div class="dropdown">
-                                                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										    {{$group->access}}
- 										 </button>
- 										 
-										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
- 										   <button type="submit" class="dropdown-item" name="access" value="Full Access">Full Access</a>
-										    <button type="submit" class="dropdown-item" name="access" value="Read Only" >Read Only</a>
-										    <button type="submit" class="dropdown-item" name="access" value="Denied" >Denied</a>
-									          </div>
-									</div>
-									
-									</form>
-									</td>
+											
+								    	</td>
+	     				                                  
+	     				                                    
+								    	
+								    </div>
 								</tr>
 								@endforeach
+							</div>	
 							</tbody>
 						 </table>
 			          
@@ -151,8 +183,14 @@
 			          		</table>
 			        	</div>
 			      	</div>
+      		      <div class="form-group float-right">
+			    	<input type="submit" name="" class="btn btn-primary" value="Save">
+			    </div>
       		       </div>
+      		        
+      		</form>
       		</div>
+      		
       	</div>
   </div> 
 </main>
