@@ -50,11 +50,11 @@
 					        		<div class="form-group row">
 					        			<label class="col-sm-4 text-right">IP Address</label>
 					        			<div class="col-sm-8">
-					        				<input type="text" name="ip_address" class="form-control">
+					        				<input type="text" name="ip_address" class="form-control" value="*.*.*.*">
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1"> Monday</label>
+					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1" checked> Monday</label>
 					        			<div class="col-sm-8">
 					        				<label>From</label>
 					        				<input type="text" name="" class="timepicker" style="width: 90px;" value="12:00 Am">
@@ -63,7 +63,7 @@
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1"> Tuesday</label>
+					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1" checked> Tuesday</label>
 					        			<div class="col-sm-8">
 					        				<label>From</label>
 					        				<input type="text" name="" class="timepicker" style="width: 90px;" value="12:00 Am">
@@ -72,7 +72,7 @@
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1"> Wednesday</label>
+					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1" checked> Wednesday</label>
 					        			<div class="col-sm-8">
 					        				<label>From</label>
 					        				<input type="text" name="" class="timepicker" style="width: 90px;" value="12:00 Am">
@@ -81,7 +81,7 @@
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1"> Thursday</label>
+					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1" checked> Thursday</label>
 					        			<div class="col-sm-8">
 					        				<label>From</label>
 					        				<input type="text" name="" class="timepicker" style="width: 90px;" value="12:00 Am">
@@ -90,7 +90,7 @@
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1"> Friday</label>
+					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1" checked> Friday</label>
 					        			<div class="col-sm-8">
 					        				<label>From</label>
 					        				<input type="text" name="" class="timepicker" style="width: 90px;" value="12:00 Am">
@@ -99,7 +99,7 @@
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1"> Saturday</label>
+					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1" checked> Saturday</label>
 					        			<div class="col-sm-8">
 					        				<label>From</label>
 					        				<input type="text" name="" class="timepicker" style="width: 90px;" value="12:00 Am">
@@ -108,7 +108,7 @@
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1"> Sunday</label>
+					        			<label class="col-sm-4"><input type="checkbox" name="eclaims" value="1" checked> Sunday</label>
 					        			<div class="col-sm-8">
 					        				<label>From</label>
 					        				<input type="text" name="" class="timepicker" style="width: 90px;" value="12:00 Am">

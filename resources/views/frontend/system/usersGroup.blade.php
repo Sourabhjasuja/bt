@@ -27,7 +27,7 @@
 								<tr>
 									<td>{{$key+1}}</td>
 									<td><a href="{{ url('/system/users/group/'.$group->id) }}">{{ $group->name }}</a></td>
-									<td><a href=""></a></td>
+									<td><a href="{{ url('/system/users/group/'.$group->id) }}" class="btn btn-sm"><i class="fas fa-edit text-warning"></i></a> <a href="javascript:void(0)" class="btn btn-sm" onclick="delConfirm('{{ $group->id }}')"><i class="fas fa-trash text-danger"></i></a></td>
 								</tr>
 								@endforeach
 							</tbody>

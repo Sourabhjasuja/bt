@@ -69,8 +69,14 @@ class SystemController extends Controller
         return view('frontend.system.userEdit')->with($data);
     }
 
-    public function usersGroup() {
+    public function usersGroup(Request $request) {
     	$userData = Auth::user();
+        if($request->input('del')){
+            \App\Models\UserGroup::find($request->input('del'))->delete();
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'User Group successfully Deleted!');
+            return redirect('system/users/group');
+        }
     	$data['userGroups'] = $userData->user_groups;	
         return view('frontend.system.usersGroup')->with($data);
     }
@@ -86,8 +92,10 @@ class SystemController extends Controller
                 foreach ($request->input('doc_permissions') as $key => $value) {
                     \App\Models\GroupHasDocPermission::create(['group_id'=>$userGroup->id, 'doc_permission_id'=>$key, 'access'=>$value]);
                 }
-                foreach ($request->input('security') as $key => $value) {
-                    \App\Models\GroupSecurity::create(['group_id'=>$userGroup->id, 'security_id'=>$key, 'access'=>$value]);
+                if($request->input('security')){
+                    foreach ($request->input('security') as $key => $value) {
+                        \App\Models\GroupSecurity::create(['group_id'=>$userGroup->id, 'security_id'=>$key, 'access'=>$value]);
+                    }
                 }
                 \App\Models\UserGroupActivity::create(['group_id'=>$userGroup->id, 'changed_by'=>$userData->id, 'activity'=>'Group created.']);
             }
