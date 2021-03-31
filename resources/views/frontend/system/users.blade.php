@@ -32,7 +32,7 @@
 									<td><a href="{{ url('/system/users/edit/'.$user->id) }}">{{ $user->first_name }}</a></td>
 									<td>{{ $user->email }}</td>
 									<td>{{ $user->login_name }}</td>
-									<td>{{ $user->user_group_name->name }}</td>
+									<td>{{ @$user->user_group_name->name }}</td>
 									<td><a href="{{ url('/system/users/edit/'.$user->id) }}" class="btn btn-sm"><i class="fas fa-edit text-warning"></i></a> <a href="javascript:void(0)" class="btn btn-sm" onclick="delConfirm('{{ $user->id }}')"><i class="fas fa-trash text-danger"></i></a></td>
 								</tr>
 								@endforeach

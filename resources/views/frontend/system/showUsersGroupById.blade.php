@@ -144,8 +144,8 @@
 			        	</div>
 			        	<div class="tab-pane" id="tab-5" role="tabpanel">
 				 			<div class="form-group row">
-				 				@foreach($group->security as $security)
-			        			<label class="col-sm-7"><input type="checkbox" name="security[{{$security->security->id}}]" @if($security->access) checked @endif> {{$security->security->name}}</label>
+				 				@foreach($securities as $security)
+			        			<label class="col-sm-7"><input type="checkbox" name="security[{{$security->id}}]" @foreach($group->security as $group_security) @if($group_security->security_id==$security->id) checked @endif @endforeach> {{$security->name}}</label>
 			        			@endforeach
 			        		</div>
 						</div>

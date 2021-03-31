@@ -78,7 +78,7 @@ class SystemController extends Controller
     public function usersGroup(Request $request) {
     	$userData = Auth::user();
         if($request->input('del')){
-            \App\Models\UserGroup::find($request->input('del'))->delete();
+            \App\Models\UserGroup::find($request->input('del'))->update(['status'=>5]);
             $request->session()->flash('message.level', 'success');
             $request->session()->flash('message.content', 'User Group successfully Deleted!');
             return redirect('system/users/group');
@@ -90,7 +90,7 @@ class SystemController extends Controller
     public function usersGroupAdd(Request $request){
     	$userData = Auth::user();
     	if($request->input()){ 
-    		$userGroup = \App\Models\UserGroup::create(['company_id'=>$userData->user_company_id, 'name'=>$request->input('name'), 'description'=>$request->input('description'), 'alert_eclaim'=>$request->input('eclaims')?1:0, 'alert_billing'=>$request->input('billing')?1:0, 'alert_cmn'=>$request->input('cmn')?1:0, 'ip_address'=>$request->input('ip_address'), 'monday_time'=>serialize(['start'=>$request->input('monday_starttime'), 'end'=>$request->input('monday_endtime')]), 'tuesday_time'=>serialize(['start'=>$request->input('tuesday_starttime'), 'end'=>$request->input('tuesday_endtime')]), 'wednesday_time'=>serialize(['start'=>$request->input('wednesday_starttime'), 'end'=>$request->input('wednesday_endtime')]), 'thursday_time'=>serialize(['start'=>$request->input('thursday_starttime'), 'end'=>$request->input('thursday_endtime')]), 'friday_time'=>serialize(['start'=>$request->input('friday_starttime'), 'end'=>$request->input('friday_endtime')]), 'saturday_time'=>serialize(['start'=>$request->input('saturday_starttime'), 'end'=>$request->input('saturday_endtime')]), 'sunday_time'=>serialize(['start'=>$request->input('sunday_starttime'), 'end'=>$request->input('sunday_endtime')])]);
+    		$userGroup = \App\Models\UserGroup::create(['company_id'=>$userData->user_company_id, 'name'=>$request->input('name'), 'description'=>$request->input('description'), 'alert_eclaim'=>$request->input('eclaims')?1:0, 'alert_billing'=>$request->input('billing')?1:0, 'alert_cmn'=>$request->input('cmn')?1:0, 'ip_address'=>$request->input('ip_address'), 'monday_time'=>serialize(['start'=>$request->input('monday_starttime'), 'end'=>$request->input('monday_endtime')]), 'tuesday_time'=>serialize(['start'=>$request->input('tuesday_starttime'), 'end'=>$request->input('tuesday_endtime')]), 'wednesday_time'=>serialize(['start'=>$request->input('wednesday_starttime'), 'end'=>$request->input('wednesday_endtime')]), 'thursday_time'=>serialize(['start'=>$request->input('thursday_starttime'), 'end'=>$request->input('thursday_endtime')]), 'friday_time'=>serialize(['start'=>$request->input('friday_starttime'), 'end'=>$request->input('friday_endtime')]), 'saturday_time'=>serialize(['start'=>$request->input('saturday_starttime'), 'end'=>$request->input('saturday_endtime')]), 'sunday_time'=>serialize(['start'=>$request->input('sunday_starttime'), 'end'=>$request->input('sunday_endtime'), 'status'=>0])]);
     		if($userGroup->id){
                 foreach ($request->input('permissions') as $key => $value) {
                     \App\Models\GroupHasPermission::create(['group_id'=>$userGroup->id, 'permission_id'=>$key, 'access'=>$value]);
@@ -120,10 +120,11 @@ class SystemController extends Controller
         $userData = Auth::user();
         $data['group'] = $userData->user_groups()->with('group_permissions.permission', 'doc_permissions.permission', 'security.security', 'activity.user')->findOrFail($groupId);
         //print_r($data['group']->security);die;
+        $data['securities'] = Security::all();
 
         return view('frontend.system.showUsersGroupById')->with($data);
     }
-    public function editUserGroup(Request $request,$groupId){
+    public function editUserGroup(Request $request,$groupId){ //print_r($request->input());die;
         $userData = Auth::user();
         $userGroup = $userData->user_groups()->find($groupId)->fill(['company_id'=>$userData->user_company_id, 'name'=>$request->input('name'), 'description'=>$request->input('description'), 'alert_eclaim'=>$request->input('eclaims')?1:0, 'alert_billing'=>$request->input('billing')?1:0, 'alert_cmn'=>$request->input('cmn')?1:0, 'ip_address'=>$request->input('ip_address'), 'monday_time'=>serialize(['start'=>$request->input('monday_starttime'), 'end'=>$request->input('monday_endtime')]), 'tuesday_time'=>serialize(['start'=>$request->input('tuesday_starttime'), 'end'=>$request->input('tuesday_endtime')]), 'wednesday_time'=>serialize(['start'=>$request->input('wednesday_starttime'), 'end'=>$request->input('wednesday_endtime')]), 'thursday_time'=>serialize(['start'=>$request->input('thursday_starttime'), 'end'=>$request->input('thursday_endtime')]), 'friday_time'=>serialize(['start'=>$request->input('friday_starttime'), 'end'=>$request->input('friday_endtime')]), 'saturday_time'=>serialize(['start'=>$request->input('saturday_starttime'), 'end'=>$request->input('saturday_endtime')]), 'sunday_time'=>serialize(['start'=>$request->input('sunday_starttime'), 'end'=>$request->input('sunday_endtime')])]);
         $dirty = $userGroup->getDirty();
@@ -138,8 +139,11 @@ class SystemController extends Controller
             \App\Models\GroupHasDocPermission::where('group_id',$groupId)->where('doc_permission_id', $key)->update(['access'=>$value]);
         }
         \App\Models\GroupSecurity::where('group_id',$groupId)->update(['access'=>0]);
-        foreach ($request->input('security') as $key => $value) {
-            \App\Models\GroupSecurity::where('group_id',$groupId)->where('security_id', $key)->update(['access'=>1]);
+        if($request->input('security')){
+            \App\Models\GroupSecurity::where('group_id',$groupId)->delete();
+            foreach ($request->input('security') as $key => $value) {
+                \App\Models\GroupSecurity::create(['group_id'=>$groupId, 'security_id'=>$key, 'access'=>1]);
+            }
         }
         //\App\Models\UserGroupActivity::create(['group_id'=>$groupId, 'changed_by'=>$userData->id, 'activity'=>'Group updated by '.$userData->first_name.' '.$userData->last_name]);
         $request->session()->flash('message.level', 'success');

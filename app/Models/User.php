@@ -40,7 +40,7 @@ class User extends Authenticatable
        return $this->company_id ? $this->company_id : $this->id;
     }
     public function user_groups(){
-        return $this->hasMany('App\Models\UserGroup', 'company_id', 'user_company_id');
+        return $this->hasMany('App\Models\UserGroup', 'company_id', 'user_company_id')->where('status', 0);
     }
 
     public function users(){
