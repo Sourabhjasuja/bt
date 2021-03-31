@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
 
     public function users(){
-        return $this->hasMany('App\Models\User', 'company_id', 'user_company_id');
+        return $this->hasMany('App\Models\User', 'company_id', 'user_company_id')->where('status', 0);
     }
     public function user_group_name(){
         return $this->hasOne('App\Models\UserGroup', 'id', 'user_group');

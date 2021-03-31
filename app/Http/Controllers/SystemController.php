@@ -19,8 +19,14 @@ class SystemController extends Controller
         return view('frontend.system.system');
     }
 
-    public function users() {
+    public function users(Request $request) {
     	$userData = Auth::user();
+        if($request->input('del')){
+            \App\Models\User::find($request->input('del'))->update(['status'=>5]);
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'User Group successfully Deleted!');
+            return redirect('system/users/group');
+        }
     	$data['users'] = $userData->users()->with('user_group_name')->get(); 
         
         return view('frontend.system.users')->with($data);
