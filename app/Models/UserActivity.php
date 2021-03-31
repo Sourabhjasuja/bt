@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inventory extends Model
+class UserActivity extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function user(){
+    	return $this->hasOne('App\Models\User', 'id', 'changed_by');
+    }
 }

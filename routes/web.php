@@ -29,19 +29,16 @@ Route::group(['prefix' => '','middleware' => 'auth'], function () {
 	Route::match(['get', 'post'], '/system','App\Http\Controllers\SystemController@index');
 	Route::get('/system/users','App\Http\Controllers\SystemController@users');
 	Route::match(['get', 'post'], '/system/users/add','App\Http\Controllers\SystemController@usersAdd');
+	Route::match(['get', 'post'], '/system/users/edit/{id}','App\Http\Controllers\SystemController@usersEdit');
 	Route::get('/system/users/group','App\Http\Controllers\SystemController@usersGroup');
 	Route::match(['get', 'post'], '/system/users/group/add','App\Http\Controllers\SystemController@usersGroupAdd');
 	Route::get('/system/users/activity','App\Http\Controllers\SystemController@usersActivity');
 	Route::get('/system/branches','App\Http\Controllers\SystemController@branches');
 	Route::get('/system/branch/add','App\Http\Controllers\SystemController@branchAdd');
-        
-    Route::get('/users/group/{groupId}','App\Http\Controllers\UserGroupController@showUserGroup');
-    //Route::post('/users/group/{groupId}/{permission_id}','App\Http\Controllers\UserGroupController@updateGeneralPermission'); 
-    //Route::post('/users/group/{groupId}/{doc_permission_id}','App\Http\Controllers\UserGroupController@updateDocPermission'); 
-    
-    Route::post('/system/users/group/{groupId}','App\Http\Controllers\UserGroupController@editUserGroup');
+    Route::get('/system/users/group/{groupId}','App\Http\Controllers\SystemController@showUserGroup');
+    Route::post('/system/users/group/{groupId}','App\Http\Controllers\SystemController@editUserGroup');
     
     /*===============Inventory=====================*/
     Route::get('/inventory', 'App\Http\Controllers\InventoryController@list');
-    Route::get('/inventory/add', 'App\Http\Controllers\InventoryController@add');
+    Route::match(['get', 'post'], '/inventory/add', 'App\Http\Controllers\InventoryController@add');
 });

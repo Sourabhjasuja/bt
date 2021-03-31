@@ -46,10 +46,16 @@ class User extends Authenticatable
     public function users(){
         return $this->hasMany('App\Models\User', 'company_id', 'user_company_id');
     }
-    public function user_group(){
+    public function user_group_name(){
         return $this->hasOne('App\Models\UserGroup', 'id', 'user_group');
     }
     public function branches(){
         return $this->hasMany('App\Models\Branch', 'company_id', 'user_company_id');
+    }
+    public function activity(){
+        return $this->hasMany('App\Models\UserActivity');
+    }
+    public function inventory(){
+        return $this->hasMany('App\Models\Inventory', 'company_id', 'user_company_id');
     }
 }

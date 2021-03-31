@@ -11,4 +11,8 @@ class GroupHasPermission extends Model
      public $timestamps = false;
      protected $table = 'GroupHasPermissions';
      protected $fillable = ['group_id','permission_id','access'];
+
+    public function permission(){
+        return $this->hasOne('App\Models\Permission', 'permission_id', 'permission_id');
+    }
 }

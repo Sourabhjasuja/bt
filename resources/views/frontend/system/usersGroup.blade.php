@@ -10,6 +10,11 @@
 					<h6>User Group <a href="{{url('system/users/group/add')}}" class="float-right btn btn-sm btn-primary"><i class="fas fa-plus"></i> Add New Group</a></h6>
 				</div>
 				<div class="card-body">
+					@if(session()->has('message.level'))
+                        <div class="alert alert-{{ session('message.level') }}">
+                        {!! session('message.content') !!}
+                        </div>
+                    @endif
 					<div class="table-responsive">
 						<table class="table simpleDataTable">
 							<thead>
@@ -21,7 +26,7 @@
 								@foreach($userGroups as $key=>$group)
 								<tr>
 									<td>{{$key+1}}</td>
-									<td><a href="{{ url('/users/group/'.$group->id) }}">{{ $group->name }}</a></td>
+									<td><a href="{{ url('/system/users/group/'.$group->id) }}">{{ $group->name }}</a></td>
 									<td><a href=""></a></td>
 								</tr>
 								@endforeach

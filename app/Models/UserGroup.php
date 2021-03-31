@@ -13,4 +13,17 @@ class UserGroup extends Authenticatable
 
     protected $table = 'user_groups';
     protected $guarded = array();
+
+    public function group_permissions(){
+        return $this->hasMany('App\Models\GroupHasPermission', 'group_id', 'id');
+    }
+    public function doc_permissions(){
+        return $this->hasMany('App\Models\GroupHasDocPermission', 'group_id', 'id');
+    }
+    public function security(){
+        return $this->hasMany('App\Models\GroupSecurity', 'group_id', 'id');
+    }
+    public function activity(){
+        return $this->hasMany('App\Models\UserGroupActivity', 'group_id', 'id')->orderBy('id', 'desc');
+    }
 }

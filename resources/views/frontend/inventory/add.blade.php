@@ -9,15 +9,14 @@
   			<h6>Add Item</h6>
   		</div>
   		<div class="card-body">
-  			<form>
+  			<form method="post">@csrf
 	  			<div class="tab">
 			      	<ul class="nav nav-tabs" role="tablist">
-			        	<li class="nav-item"><a class="nav-link active" href="#tab-1" onclick="$('form').submit();">Item</a></li>
-			        	<li class="nav-item"><a class="nav-link" href="#tab-2" onclick="$('form').submit();">Serial Nos.</a></li>
+			        	<li class="nav-item"><a class="nav-link active" href="#tab-1" data-toggle="tab" role="tab">Item</a></li>
+			        	<li class="nav-item"><a class="nav-link" href="#tab-2" data-toggle="tab" role="tab">Serial Nos.</a></li>
 			        	<li class="nav-item"><a class="nav-link" href="#tab-3" data-toggle="tab" role="tab">Pricing</a></li>
 			        	<li class="nav-item"><a class="nav-link" href="#tab-4" data-toggle="tab" role="tab">Package</a></li>
 			        	<li class="nav-item"><a class="nav-link" href="#tab-5" data-toggle="tab" role="tab">Documents</a></li>
-			        	<li class="nav-item"><a class="nav-link" href="#tab-6" data-toggle="tab" role="tab">History</a></li>
 			      	</ul>
 			      	<div class="tab-content">
 			        	<div class="tab-pane active" id="tab-1" role="tabpanel">
@@ -119,25 +118,9 @@
 						        		</div>
 					        		</div>
 					        		<div class="form-group row">
-					        			<label class="col-sm-4 text-right">Coverage Type</label>
-					        			<div class="col-sm-8">
-						        			<select class="form-control" name="coverage_type" required>
-						        				<option value="0">[None]</option>
-						        				<option value="1">DME</option>
-						        				<option value="2">Major Medical</option>
-						        			</select>
-						        		</div>
-					        		</div>
-					        		<div class="form-group row">
-					        			<label class="col-sm-4 text-right">Weight</label>
-					        			<div class="col-sm-8">
-						        			<input type="text" name="weight" class="form-control">
-						        		</div>
-					        		</div>
-					        		<div class="form-group row">
 					        			<label class="col-sm-4 text-right required">Status</label>
 					        			<div class="col-sm-8">
-						        			<select class="form-control" name="coverage_type" required>
+						        			<select class="form-control" name="status" required>
 						        				<option value="0">[None]</option>
 						        				<option value="1">Active</option>
 						        				<option value="2">Discontinued</option>
@@ -146,81 +129,8 @@
 						        			</select>
 						        		</div>
 					        		</div>
-					        		<div class="form-group row">
-					        			<label class="col-sm-4 text-right">Service Cat</label>
-					        			<div class="col-sm-8">
-						        			<input type="text" name="service_cat" class="form-control">
-						        		</div>
-					        		</div>
-					        		<div class="form-group row">
-					        			<label class="col-sm-4 text-right">Prior System Key</label>
-					        			<div class="col-sm-8">
-					        				<div class="form-check">
-					        					<input type="checkbox" name="prior_system[]" value="5" class="form-check-input" id="exampleCheck5">
-    											<label class="form-check-label" for="exampleCheck5">Lotted</label>
-					        				</div>
-					        				<div class="form-check">
-					        					<input type="checkbox" name="prior_system[]" value="1" class="form-check-input" id="exampleCheck1">
-    											<label class="form-check-label" for="exampleCheck1">Kit Item</label>
-					        				</div>
-						        			<div class="form-check">
-	    										<input type="checkbox" name="prior_system[]" value="2" class="form-check-input" id="exampleCheck2">
-	    										<label class="form-check-label" for="exampleCheck2">Auto Re-order</label>
-    										</div>
-    										<div class="form-check">
-	    										<input type="checkbox" name="prior_system[]" value="3" class="form-check-input" id="exampleCheck3">
-	    										<label class="form-check-label" for="exampleCheck3">Exclude from Purchase Order</label>
-    										</div>
-    										<div class="form-check">
-	    										<input type="checkbox" name="prior_system[]" value="4" class="form-check-input" id="exampleCheck4">
-	    										<label class="form-check-label" for="exampleCheck4">Exclude from Sales Order</label>
-    										</div>
-						        		</div>
-					        		</div>
 			        			</div>
 			        			
-			        			<div class="col-sm-4">
-			        				<div class="form-group row">
-					        			<label class="col-sm-4 text-center">Manufacturer</label>
-					        		</div>
-					        		<div class="form-group row">
-					        			<label class="col-sm-4 text-right">Name</label>
-					        			<div class="col-sm-8">
-						        			<select name="manufacturer_name" class="form-control">
-												<option selected="selected" value="0">[None]</option>
-												<option value="114">AirSep</option>
-												<option value="118">DRIVE</option>
-												<option value="116">Guardian</option>
-												<option value="105">Invacare</option>
-												<option value="292">LOT#______________________________________________</option>
-												<option value="120">MABIS DMI</option>
-												<option value="336">MAKE:____________________MODEL:_______________</option>
-												<option value="337">MAKE:____________________MODEL:_______________SIZE</option>
-												<option value="132">MAKE:__________________MODEL:__________________HRS</option>
-												<option value="119">MEDLINE</option>
-												<option value="129">PRIDE</option>
-												<option value="121">PROBASICS</option>
-												<option value="111">ResMed</option>
-												<option value="108">Respironics</option>
-												<option value="112">Ross Labs</option>
-												<option value="109">Salter Labs</option>
-												<option value="307">SN#_______________________________________________</option>
-											</select>
-						        		</div>
-					        		</div>
-					        		<div class="form-group row">
-					        			<label class="col-sm-4 text-right">ID</label>
-					        			<div class="col-sm-8">
-					        				<input type="text" name="manufacturer_id" class="form-control">
-					        			</div>
-					        		</div>
-					        		<div class="form-group row">
-					        			<label class="col-sm-4 text-right">Bar Code</label>
-					        			<div class="col-sm-8">
-					        				<input type="text" name="manufacturer_bar_code" class="form-control">
-					        			</div>
-					        		</div>
-			        			</div>
 			        			<div class="col-sm-4">
 			        				<div class="form-group row">
 					        			<label class="col-sm-4 text-center">User Data</label>
@@ -229,7 +139,7 @@
 					        		<div class="form-group row">
 					        			<label class="col-sm-4 text-right">User {{$i}}</label>
 					        			<div class="col-sm-8">
-					        				<input type="text" name="user_data_{{$i}}" class="form-control">
+					        				<input type="text" name="user_{{$i}}" class="form-control">
 					        			</div>
 					        		</div>
 					        		@endfor
@@ -238,31 +148,31 @@
 					        		</div>
 					        		<div class="form-group row">
 					        			<label class="col-sm-4 text-right">Proc Code</label>
-					        			<div class="col-sm-6">
-					        				<input type="text" name="proc_code" class="form-control">
-					        			</div>
-					        			<div class="col-sm-2">
-					        				<a href="javascript:void(0)" class="btn btn-sm"><i class="fa fa-search"></i></a><a href="javascript:void(0)" class="btn btn-sm"><i class="fa fa-trash"></i></a>
+					        			<div class="col-sm-8">
+					        				<input type="text" name="proc_code" class="form-control" required>
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
 					        			<label class="col-sm-4 text-right">Rental Amount</label>
 					        			<div class="col-sm-8">
-					        				<input type="text" name="rental_amount" class="form-control">
+					        				<input type="text" name="rental_amount" class="form-control" required>
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
 					        			<label class="col-sm-4 text-right">Purchase Amount</label>
 					        			<div class="col-sm-8">
-					        				<input type="text" name="purchase_amount" class="form-control">
+					        				<input type="text" name="purchase_amount" class="form-control" required>
 					        			</div>
 					        		</div>
 					        		<div class="form-group row">
 					        			<label class="col-sm-4 text-right">Default Billing Multiplier</label>
 					        			<div class="col-sm-8">
-					        				<input type="text" name="default_billing_multiplier" class="form-control">
+					        				<input type="text" name="default_multiplier" class="form-control">
 					        			</div>
 					        		</div>
+			        			</div>
+			        			<div class="col-sm-4">
+			        				
 			        			</div>
 			        		</div>
 			        	</div>
@@ -278,24 +188,7 @@
 			        	<div class="tab-pane" id="tab-5" role="tabpanel">
 			          
 			        	</div>
-			        	<div class="tab-pane" id="tab-6" role="tabpanel">
-			          		<table class="table">
-			          			<thead>
-			          				<tr>
-			          					<th>Date Changed</th>
-			          					<th>Changed By</th>
-			          					<th>Changed</th>
-			          				</tr>
-			          			</thead>
-			          			<tbody>
-			          				<tr>
-			          					<td></td>
-			          					<td></td>
-			          					<td></td>
-			          				</tr>
-			          			</tbody>
-			          		</table>
-			        	</div>
+			        	
 			      	</div>
 			    </div>
 			    <div class="form-group row float-right">

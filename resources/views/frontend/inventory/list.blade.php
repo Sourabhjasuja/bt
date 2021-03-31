@@ -10,19 +10,25 @@
 					<h6>Inventory <a href="{{url('inventory/add')}}" class="float-right btn btn-sm btn-primary"><i class="fas fa-plus"></i> Add New </a></h6>
 				</div>
 				<div class="card-body">
+					@if(session()->has('message.level'))
+                        <div class="alert alert-{{ session('message.level') }}">
+                        {!! session('message.content') !!}
+                        </div>
+                    @endif
 					<div class="table-responsive">
 						<table class="table simpleDataTable">
 							<thead>
-								<th>Sr No#</th>
-								<th>Name</th>
 								<th></th>
+								<th>Item ID#</th>
+								<th>Item Name</th>
+								
 							</thead>
 							<tbody>
 								@foreach($inventory as $key=>$product)
 								<tr>
-									<td>{{$key+1}}</td>
+									<td><a href="{{ url('/inventory/edit/'.$product->id) }}" class="btn btn-sm"><i class="fas fa-edit text-warning"></i></a></td>
+									<td>{{$product->sku}}</td>
 									<td><a href="{{ url('/inventory/edit/'.$product->id) }}">{{ $product->name }}</a></td>
-									<td></td>
 								</tr>
 								@endforeach
 							</tbody>
