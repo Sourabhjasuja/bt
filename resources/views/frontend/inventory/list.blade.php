@@ -26,7 +26,7 @@
 							<tbody>
 								@foreach($inventory as $key=>$product)
 								<tr>
-									<td><a href="{{ url('/inventory/edit/'.$product->id) }}" class="btn btn-sm"><i class="fas fa-edit text-warning"></i></a></td>
+									<td><a href="{{ url('/inventory/edit/'.$product->id) }}" class="btn btn-sm"><i class="fas fa-edit text-warning"></i></a><a href="javascript:void(0)" class="btn btn-sm" onclick="delConfirm('{{ $product->id }}')"><i class="fas fa-trash text-danger"></i></a></td>
 									<td>{{$product->sku}}</td>
 									<td><a href="{{ url('/inventory/edit/'.$product->id) }}">{{ $product->name }}</a></td>
 								</tr>

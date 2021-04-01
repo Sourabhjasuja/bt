@@ -41,4 +41,5 @@ Route::group(['prefix' => '','middleware' => 'auth'], function () {
     /*===============Inventory=====================*/
     Route::get('/inventory', 'App\Http\Controllers\InventoryController@list');
     Route::match(['get', 'post'], '/inventory/add', 'App\Http\Controllers\InventoryController@add');
+    Route::match(['get', 'post'], '/inventory/edit/{id}', 'App\Http\Controllers\InventoryController@edit');
 });
