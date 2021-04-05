@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Hash; use Auth;
+use Hash; use Auth; use DB;
 
 class FrontendController extends Controller
 {
@@ -31,5 +31,13 @@ class FrontendController extends Controller
     	}
     	$data['user'] = Auth::user();
     	return view('frontend.profile')->with($data);
+    }
+    public function deleteEntry(Request $request){
+        $type = $request->input('type');
+        if($type){
+            DB::delete('delete from '.$request->input("table").' where id = ?',[$request->input("id")]);
+        }else{
+            DB::table($request->input("table"))->where('id', $request->input("id"))->update(['status'=>5]);
+        }
     }
 }

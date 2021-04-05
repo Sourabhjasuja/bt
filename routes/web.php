@@ -25,6 +25,7 @@ require __DIR__.'/admin.php';
 Route::group(['prefix' => '','middleware' => 'auth'], function () { 
 	
 	Route::get('/dashboard','App\Http\Controllers\FrontendController@dashboard')->name('dashboard');
+	Route::post('/deleteEntry','App\Http\Controllers\FrontendController@deleteEntry');
 	Route::match(['get', 'post'], '/profile','App\Http\Controllers\FrontendController@profile')->name('profile');
 	Route::match(['get', 'post'], '/system','App\Http\Controllers\SystemController@index');
 	Route::get('/system/users','App\Http\Controllers\SystemController@users');
@@ -42,4 +43,8 @@ Route::group(['prefix' => '','middleware' => 'auth'], function () {
     Route::get('/inventory', 'App\Http\Controllers\InventoryController@list');
     Route::match(['get', 'post'], '/inventory/add', 'App\Http\Controllers\InventoryController@add');
     Route::match(['get', 'post'], '/inventory/edit/{id}', 'App\Http\Controllers\InventoryController@edit');
+    Route::match(['get', 'post'], '/inventory/search', 'App\Http\Controllers\InventoryController@search');
+    Route::get('/inventory/getInventory/{id}', 'App\Http\Controllers\InventoryController@getInventory');
+    Route::post('/inventory/documentUpload', 'App\Http\Controllers\InventoryController@documentUpload');
+    Route::get('/inventory/getPricing/{id}', 'App\Http\Controllers\InventoryController@getPricing');
 });
