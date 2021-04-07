@@ -425,9 +425,7 @@
   	</div>
   </div>
 </main>
-<style type="text/css">ul.ui-autocomplete {
-    z-index: 1100;
-}</style>
+<style type="text/css">ul.ui-autocomplete { z-index: 1100; }</style>
 <!-- Modal -->
 <div id="package_item" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">

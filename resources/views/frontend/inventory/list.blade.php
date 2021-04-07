@@ -7,7 +7,7 @@
 		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-header">
-					<h6>Inventory <a href="{{url('inventory/add')}}" class="float-right btn btn-sm btn-primary"><i class="fas fa-plus"></i> Add New </a></h6>
+					<h6>Inventory <span class="float-right"><a href="{{url('inventory/transactions')}}" class="btn btn-sm btn-primary">Transactions </a> <a href="{{url('inventory/add')}}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Add New </a></span></h6>
 				</div>
 				<div class="card-body">
 					@if(session()->has('message.level'))

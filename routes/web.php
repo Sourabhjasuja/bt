@@ -47,4 +47,7 @@ Route::group(['prefix' => '','middleware' => 'auth'], function () {
     Route::get('/inventory/getInventory/{id}', 'App\Http\Controllers\InventoryController@getInventory');
     Route::post('/inventory/documentUpload', 'App\Http\Controllers\InventoryController@documentUpload');
     Route::get('/inventory/getPricing/{id}', 'App\Http\Controllers\InventoryController@getPricing');
+    Route::get('/inventory/transactions', 'App\Http\Controllers\InventoryController@transactions');
+    Route::match(['get', 'post'], '/inventory/transactions/add', 'App\Http\Controllers\InventoryController@addTrans');
+    Route::match(['get', 'post'], '/inventory/transactions/edit/{id}', 'App\Http\Controllers\InventoryController@editTrans');
 });

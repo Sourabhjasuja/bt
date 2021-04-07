@@ -133,4 +133,60 @@ class InventoryController extends Controller
     	$data = \App\Models\InventoryPrice::findOrFail($id);
     	return response()->json(['info'=>'success', 'data'=>$data], 200); 
     }
+
+    public function transactions(){
+    	$userData = Auth::user();
+    	$data['transactions'] = $userData->inventory_transactions;
+
+    	return view('frontend.inventory.transactions')->with($data);
+    }
+    public function addTrans(Request $request){
+    	$userData = Auth::user();
+    	if($request->input()){
+    		\App\Models\InventoryTransaction::create(['trans_date'=>date('Y-m-d', strtotime($request->input('trans_date'))), 'reference'=>$request->input('reference'), 'description'=>$request->input('description'), 'company_id'=>$userData->user_company_id, 'status'=>0]);
+    		$request->session()->flash('message.level', 'success');
+	        $request->session()->flash('message.content', 'Purchase Transaction successfully Added!');
+	        return redirect('inventory/transactions');
+    	}
+    	return view('frontend.inventory.addTransactions');
+    }
+    public function editTrans($id, Request $request){
+    	$userData = Auth::user();
+    	$data['transaction'] = $userData->inventory_transactions()->with('inventory_items.item')->findOrFail($id);
+    	//print_r($data);die;
+    	$data['item'] = $data['type'] = $data['transaction_item'] = ''; $data['type'] = $request->input('type');
+    	if($request->input('item_no')){
+    		$data['item'] = $userData->inventory()->with('item_group_inventory')->findOrFail($request->input('item_no'));
+    	}
+    	if($request->input('transaction_item_id')){
+    		$data['transaction_item'] = \App\Models\InventoryTransactionItem::with('serial_numbers')->find($request->input('transaction_item_id'));
+    	}
+    	if($request->input('qty')){ 
+    		if($request->input('transaction_item_id')){
+    			\App\Models\InventoryTransactionItem::find($request->input('transaction_item_id'))->update(['qty'=>$request->input('qty'), 'bill_qty'=>$request->input('bill_qty'), 'unit_amount'=>$request->input('unit_amount')]);
+    			if($data['item']->item_type==5){
+    				\App\Models\InventorySerialNumber::where('transaction_item_id', $data['transaction_item']->id)->delete();
+	    			foreach ($request->input('serial_qty') as $key => $value) {
+	    				\App\Models\InventorySerialNumber::create(['transaction_item_id'=>$data['transaction_item']->id, 'item_id'=>$data['transaction_item']->item_id, 'qty'=>$value, 'serial_number'=>$request->input('serial_number')[$key], 'asset_number'=>$request->input('asset_number')[$key]]);
+	    			}
+    			}
+    			$request->session()->flash('message.level', 'success');
+		        $request->session()->flash('message.content', 'Items successfully Updated!');
+		        return redirect('inventory/transactions');
+    		}else{
+    			$inventory_item = \App\Models\InventoryTransactionItem::create(['transaction_id'=>$id, 'item_id'=>$request->input('item_no'), 'type'=>$request->input('type'), 'qty'=>$request->input('qty'), 'bill_qty'=>$request->input('bill_qty'), 'unit_amount'=>$request->input('unit_amount')]);
+    			if($data['item']->item_type==5){
+		    		foreach ($request->input('serial_qty') as $key => $value) {
+		    			\App\Models\InventorySerialNumber::create(['transaction_item_id'=>$inventory_item->id, 'item_id'=>$request->input('item_no'), 'qty'=>$value, 'serial_number'=>$request->input('serial_number')[$key], 'asset_number'=>$request->input('asset_number')[$key]]);
+		    		}
+		    	}
+		    	$request->session()->flash('message.level', 'success');
+		        $request->session()->flash('message.content', 'Items successfully Added!');
+		        return redirect('inventory/transactions');
+    		}
+    	}
+    	
+    	$data['branches'] = ['branch'];
+    	return view('frontend.inventory.editTransaction')->with($data);
+    }
 }

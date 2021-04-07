@@ -69,6 +69,33 @@ $(document).ready(function(){
 				}
 			}
 		});
-	})
+	});
+	$( ".search_inventory_trans" ).autocomplete({
+      source: base_url+"/inventory/search",
+      minLength: 2,
+      select: function( event, ui ) {
+        $.ajax({ url: base_url+"/inventory/getInventory/"+ui.item.id,
+            success: function(result){
+                if(result.info=="success"){
+                	window.location.href='?item_no='+result.data.id;
+                }else{
+                	alert("some error occured");
+                }
+            }
+        });
+      }
+    });
+    $('.addSerialNumber').click(function(){
+    	$('.serialNumberTable tbody').append('<tr><td><input type="number" min="1" name="serial_qty[]" value="1" readonly></td><td><input type="text" name="serial_number[]" required></td> <td><input type="text" name="asset_number[]"></td><td><a href="javascript:void(0)" class="btn btn-sm rmSerialNumber"><i class="fas fa-trash text-danger"></i></a></td> </tr>');
+    	var qty = $('input[name=qty]').val();
+    	$('input[name=qty]').val(parseInt(qty)+1);
+    	$('input[name=bill_qty]').val(parseInt(qty)+1);
+    });
+    $('.serialNumberTable').on('click', '.rmSerialNumber', function(){ 
+    	$(this).closest('tr').remove();
+    	var qty = $('input[name=qty]').val();
+    	$('input[name=qty]').val(parseInt(qty)-1);
+    	$('input[name=bill_qty]').val(parseInt(qty)-1);
+    });
 });
 

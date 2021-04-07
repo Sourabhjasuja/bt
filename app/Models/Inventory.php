@@ -22,4 +22,7 @@ class Inventory extends Model
     public function pricing(){
     	return $this->hasMany('App\Models\InventoryPrice');
     }
+    public function item_group_inventory(){
+    	return $this->hasOne('App\Models\ItemGroup', 'id', 'item_group');
+    }
 }

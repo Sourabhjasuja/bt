@@ -152,8 +152,18 @@ class SystemController extends Controller
         return redirect('system/users/group');
     }
     
-    public function usersActivity() {
-        return view('frontend.system.usersActivity');
+    public function usersActivity(Request $request) {
+        $userData = Auth::user();
+        if($request->input('logout')){
+            \App\SessionDB::where('user_id', $request->input('logout'))->delete();
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'User successfully logged out!');
+        
+            return redirect('/system/users/activity');
+        }
+        $data['users'] = User::where('company_id', $userData->user_company_id)->orWhere('id', $userData->user_company_id)->with('sessions')->get();
+        
+        return view('frontend.system.usersActivity')->with($data);
     }
 
     public function branches(){

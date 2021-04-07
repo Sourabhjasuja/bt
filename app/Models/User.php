@@ -46,6 +46,9 @@ class User extends Authenticatable
     public function users(){
         return $this->hasMany('App\Models\User', 'company_id', 'user_company_id')->where('status', 0);
     }
+    public function sessions(){
+        return $this->hasOne('App\Models\SessionDB')->orderBy('last_activity', 'desc');
+    }
     public function user_group_name(){
         return $this->hasOne('App\Models\UserGroup', 'id', 'user_group');
     }
@@ -57,5 +60,8 @@ class User extends Authenticatable
     }
     public function inventory(){
         return $this->hasMany('App\Models\Inventory', 'company_id', 'user_company_id');
+    }
+    public function inventory_transactions(){
+        return $this->hasMany('App\Models\InventoryTransaction', 'company_id', 'user_company_id');
     }
 }
